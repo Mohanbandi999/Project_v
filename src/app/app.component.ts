@@ -20,4 +20,10 @@ export class AppComponent implements OnInit  {
   loginIt(){
    this.router.navigate(['./http']);
   }
+  subjectFun(){
+    this.router.navigate(['./subject']);
+  }
+  pipesFun(){
+    this.router.navigate(['./pipes']);
+  }
 }

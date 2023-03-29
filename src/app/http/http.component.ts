@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { HttpService } from '../shared/http.service';
 
 @Component({
@@ -12,25 +12,37 @@ export class HttpComponent implements OnInit {
   constructor(private httpSer:HttpService) { }
 
   newdata:any;
-  users:any;
-  contacts$:any;
+  
   dataone:any;
  status:any;
-  ngOnInit(): void {
-  this.users=['ram','sita','radha','krishna'];
+ users=['ram','sita','radha','krishna'];
 
-  this.contacts$=of (this.users);
-  this.contacts$.subscribe((data: any)=>this.dataone=data)
+  contacts$=of (this.users);
+
+
+  ngOnInit(): void {
+     this.contacts$.subscribe((val)=>{
+      this.dataone=val
+      
+     
+     })
+
+
+
+  
+  // this.contacts$.subscribe((data: any)=>{setTimeout(() => {this.contacts$=data
+    
+  // }, 10000)});
   
 
-  new Observable(obs=>{
+  // new Observable(obs=>{
 
-    obs.next("mohan");
-    obs.next("mohan 2")
-    obs.next("mohan 3")
-  }).subscribe(data=>{
-    this.status=data
-  });
+  //   obs.next("mohan");
+  //   obs.next("mohan 2")
+  //   obs.next("mohan 3")
+  // }).subscribe(data=>{
+  //   this.status=data
+  // });
     
   
 
@@ -38,5 +50,8 @@ export class HttpComponent implements OnInit {
   }
   getPosts(){
     this.httpSer.getEmployee().subscribe(data=>this.newdata=data);
+    console.log(this.newdata)
   }
+
+  
 }
